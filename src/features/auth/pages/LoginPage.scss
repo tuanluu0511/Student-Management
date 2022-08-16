@@ -1,0 +1,32 @@
+.login {
+  max-width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  &_box {
+    border-radius: 3px;
+    padding: 1rem 2rem;
+    box-shadow: 1px 1px 5px rgba($color: #000000, $alpha: 0.2);
+  }
+  &--title {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+  &--btn {
+    width: 100%;
+    font-size: 1.25rem;
+    padding: 0.75rem 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    background-color: darkblue;
+    margin: 1.5rem 0 0.75rem 0;
+    border: none;
+    cursor: pointer;
+  }
+}

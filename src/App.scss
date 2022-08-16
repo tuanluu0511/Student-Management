@@ -1,0 +1,14 @@
+.header {
+  &_btn {
+    width: 10rem;
+    font-size: 1.25rem;
+    padding: 0.75rem 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    background-color: darkblue;
+    margin: 1.5rem 0 0.75rem 0;
+    border: none;
+    cursor: pointer;
+  }
+}
