@@ -1,11 +1,11 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
 import App from './App';
-import { store } from './app/store';
+import { history, store } from './app/store';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import { HistoryRouter as Router } from 'redux-first-history/rr6';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -13,9 +13,9 @@ const root = createRoot(container);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
+      <Router history={history}>
         <App />
-      </BrowserRouter>
+      </Router>
     </Provider>
   </React.StrictMode>
 );

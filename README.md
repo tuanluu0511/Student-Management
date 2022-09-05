@@ -58,3 +58,57 @@ LOOP
 
 authSlice: Action, reducer
 authSaga: Effect
+
+---
+
+### Different way to handle navigation in Redux Saga
+
+1. Watch redux store and make redirect on component
+   const function App() {
+   const loginSuccess = useAppSelector(state => state.auth.loginSuccess)
+   useEffect(()=>{
+   if(loginSuccess) {
+   //redirect to admin page
+   }
+   },[loginSuccess])
+   // ...
+   }
+
+--> Flow is fragment, hard to control when you have more and more state.
+
+2. Using callbacks
+
+- This approach using-serialize (callback) in action and dispatch to redux store which is NOT RECOMMENDED BY Redux Toolkit
+
+const function App() {
+const dispatch = useAppDispatch();
+
+const handleLoginSubmit = (values)
+=> {
+dispatch(authActions.login({
+...values,
+onSuccess: () => history.push('/admin');
+onError: () => console.log('Notify error to user')
+}))
+}
+}
+
+3. Using connected-react-router
+
+- Sync routing to redux
+- Navigate by dispatching an action to redux store.
+- One thing to make sure, when route changes, it doesn't cause re-render our components.
+
+=> Lib: connected-react-router/redux-first-history + custom history
+
+4. Use createBrowserHistory from history
+
+- Create file history.ts
+  import { createBrowserHistory } from "history";
+  export default createBrowserHistory();
+
+In App.tsx we use component <Router history={history (file history mình vừa tạo ở trên)} /> của react-router dom bao bọc <Switch/>
+
+Use history.push(url) in Saga.
+
+---

@@ -25,6 +25,7 @@ function App() {
       >
         Log out
       </button>
+
       <Routes>
         <Route path="/" element={<Navigate to="/login" />}></Route>
 
