@@ -1,0 +1,25 @@
+// background-color: #8ca0ff;
+.header {
+  display: flex;
+  padding: 1.5rem;
+  justify-content: space-between;
+  background-color: #0f5bd6;
+
+  &__title {
+    color: #fff;
+  }
+
+  &__btn {
+    // width: 10rem;
+    font-size: 1.25rem;
+    // padding: 0.75rem 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: none;
+    color: #fff;
+    text-decoration: none;
+    background-color: #0f5bd6;
+    display: inline-block;
+    cursor: pointer;
+  }
+}

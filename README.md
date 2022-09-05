@@ -112,3 +112,17 @@ In App.tsx we use component <Router history={history (file history mình vừa t
 Use history.push(url) in Saga.
 
 ---
+
+### Handle loading/ error in redux saga
+
+- RTK + Thunk: provide a way to await an async action right on component --> Handle loading/error on component easily
+
+- RTK + Saga: doesn't have so:
+
+* Loading: can based on redux store
+* ERROR: eliminate the usage as much as you can.
+
+Consideration:
+
+- Trigger error toast from saga.
+- Consider to call API directly on component instead of going through saga.

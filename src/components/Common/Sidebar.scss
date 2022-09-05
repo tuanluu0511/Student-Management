@@ -1,0 +1,17 @@
+.sidebar__item {
+  text-decoration: none;
+  display: block;
+  color: #666;
+  padding: 1.5rem 2rem;
+  cursor: pointer;
+  transition: all ease-out 0.5s;
+}
+
+.sidebar__item:hover,
+.sidebar__item.active {
+  background-color: darken($color: #ebe6e6, $amount: 0);
+}
+.sidebar__item.active {
+  color: rgb(20, 20, 20);
+  // font-weight: bold;
+}
