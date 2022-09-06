@@ -77,7 +77,7 @@ export default function Dashboard() {
               />
             </Widget>
             {rankingByCityList.map((rankingByCity, idx) => (
-              <Widget title={idx === 0 ? 'Ranking by city' : ''}>
+              <Widget key={rankingByCity.cityId} title={idx === 0 ? 'Ranking by city' : ''}>
                 <StudentRankingList
                   label={rankingByCity.cityName}
                   studentList={rankingByCity.rankingList}
