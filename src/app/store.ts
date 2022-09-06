@@ -1,10 +1,11 @@
-import { Action, configureStore, ThunkAction, combineReducers } from '@reduxjs/toolkit';
+import { Action, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import authReducer from 'features/auth/authSlice';
+import dashboardReducer from 'features/dashboard/dashboardSlice';
+import { createBrowserHistory } from 'history';
+import { createReduxHistoryContext } from 'redux-first-history';
 import createSagaMiddleware from 'redux-saga';
 import counterReducer from '../features/counter/counterSlice';
 import rootSaga from './rootSaga';
-import { createReduxHistoryContext } from 'redux-first-history';
-import { createBrowserHistory } from 'history';
 
 const { createReduxHistory, routerMiddleware, routerReducer } = createReduxHistoryContext({
   history: createBrowserHistory(),
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   counter: counterReducer,
   auth: authReducer,
   router: routerReducer,
+  dashboard: dashboardReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();

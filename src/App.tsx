@@ -7,9 +7,14 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import './App.scss';
 
 function App() {
+  const isLoggedIn = localStorage.getItem('access_token');
+
   return (
     <Routes>
-      <Route path="/" element={<Navigate to="/login" />}></Route>
+      <Route
+        path="/"
+        element={isLoggedIn ? <Navigate to="admin/dashboard" /> : <Navigate to="/login" />}
+      ></Route>
 
       <Route path="/login" element={<LoginPage />} />
 
