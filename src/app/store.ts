@@ -1,6 +1,7 @@
 import { Action, combineReducers, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import authReducer from 'features/auth/authSlice';
 import dashboardReducer from 'features/dashboard/dashboardSlice';
+import studentReducer from 'features/students/studentSlice';
 import { createBrowserHistory } from 'history';
 import { createReduxHistoryContext } from 'redux-first-history';
 import createSagaMiddleware from 'redux-saga';
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   router: routerReducer,
   dashboard: dashboardReducer,
+  student: studentReducer,
 });
 
 const sagaMiddleware = createSagaMiddleware();
