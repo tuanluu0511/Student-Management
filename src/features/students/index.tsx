@@ -1,3 +1,9 @@
+import { Outlet } from 'react-router-dom';
+
 export default function StudentFeature() {
-  return <div>Student Feature</div>;
+  return (
+    <div>
+      <Outlet />
+    </div>
+  );
 }
