@@ -1,0 +1,57 @@
+:root {
+  --blue: #0083da;
+  --cyan: #2cccdb;
+  --green: #afdc5c;
+}
+
+.loadingBar {
+  width: 100%;
+  height: 8px;
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: -100%;
+    will-change: transform;
+    background: linear-gradient(
+      90deg,
+      var(--blue) 0%,
+      var(--blue) 25%,
+      var(--cyan) 25%,
+      var(--cyan) 37.5%,
+      var(--green) 37.5%,
+      var(--green) 50%,
+      var(--blue) 50%,
+      var(--blue) 75%,
+      var(--cyan) 75%,
+      var(--cyan) 87.5%,
+      var(--green) 87.5%,
+      var(--green) 100%
+    );
+    -webkit-animation: 1.3s progress ease infinite;
+    animation: 1.3s progress ease infinite;
+  }
+}
+
+@-webkit-keyframes progress {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(50%);
+  }
+}
+
+@keyframes progress {
+  0% {
+    transform: translate(0);
+  }
+  100% {
+    transform: translate(50%);
+  }
+}

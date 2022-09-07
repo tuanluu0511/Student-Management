@@ -5,8 +5,8 @@ import { ListParams, PaginationParams, Student, ListResponse } from 'models';
 export interface StudentState {
   loading: boolean;
   list: Student[];
-  filter?: ListParams;
-  pagination?: PaginationParams;
+  filter: ListParams;
+  pagination: PaginationParams;
 }
 
 const initialState: StudentState = {
@@ -14,7 +14,7 @@ const initialState: StudentState = {
   list: [],
   filter: {
     _page: 1,
-    limit: 15,
+    _limit: 15,
   },
   pagination: {
     _page: 1,
