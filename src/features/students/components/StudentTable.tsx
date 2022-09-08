@@ -1,14 +1,20 @@
-import { Student } from 'models';
+import { City, Student } from 'models';
 import { capitalizeString, getMarkColor } from 'utils';
 import './StudentTable.scss';
 
 export interface StudentTableProps {
   studentList: Student[];
+  cityList: { [key: string]: City };
   onEdit: (student: Student) => void;
   onRemove: (student: Student) => void;
 }
 
-export default function StudentTable({ studentList, onEdit, onRemove }: StudentTableProps) {
+export default function StudentTable({
+  studentList,
+  onEdit,
+  onRemove,
+  cityList,
+}: StudentTableProps) {
   return (
     <table className="student__table">
       <thead className="student__table__head">
@@ -42,7 +48,7 @@ export default function StudentTable({ studentList, onEdit, onRemove }: StudentT
               {student.mark}
             </td>
             <td className="student__table__body--cells student__table__body--cells--5th">
-              {student.city}
+              {cityList[student.city]?.name}
             </td>
             <td className="student__table__body--cells student__table__body--cells--6th">
               <button

@@ -13,12 +13,15 @@ import {
   studentActions,
 } from '../studentSlice';
 
+import { selectCityList } from 'features/city/citySlice';
+
 export default function ListPage() {
   const dispatch = useAppDispatch();
   const studentList = useAppSelector(selectStudentList);
   const pagination = useAppSelector(selectStudentPagination);
   const filter = useAppSelector(selectStudentFilter);
   const loading = useAppSelector(selectStudentLoading);
+  const cityList = useAppSelector(selectCityList);
 
   useEffect(() => {
     dispatch(studentActions.fetchStudentList(filter));
@@ -40,7 +43,7 @@ export default function ListPage() {
             Add new student
           </button>
         </div>
-        <StudentTable studentList={studentList} onRemove={removeHandler} onEdit={editHandler} />
+        <StudentTable studentList={studentList} onRemove={removeHandler} onEdit={editHandler} cityList={cityList} />
         {/* Pagination */}
         {loading && <LoadingBar />}
 
