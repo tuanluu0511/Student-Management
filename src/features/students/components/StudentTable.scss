@@ -23,6 +23,19 @@
       text-align: left;
       font-size: 1.4rem;
       border-bottom: 1px solid rgba(224, 224, 224, 1);
+
+      &--4th.green {
+        color: green;
+        font-weight: bold;
+      }
+      &--4th.red {
+        color: red;
+        font-weight: bold;
+      }
+      &--4th.goldenrod {
+        font-weight: bold;
+        color: goldenrod;
+      }
     }
   }
 }
@@ -49,19 +62,20 @@
     box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms, border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
   &--edit {
-    background-color: #3f51b5;
+    color: #3f51b5;
     margin-right: 0.8rem;
     &:hover {
-      background-color: #303f9f;
+      // background-color: #303f9f;
+      background-color: rgba(245, 0, 87, 0.04);
     }
   }
   &--remove {
     background-color: none;
     color: #f50057;
-    border: 1px solid #f50057;
+    // border: 1px solid #f50057;
 
     &:hover {
-      border: 1px solid #f50057;
+      // border: 1px solid #f50057;
       background-color: rgba(245, 0, 87, 0.04);
     }
   }

@@ -1,4 +1,5 @@
 import { Student } from 'models';
+import { capitalizeString, getMarkColor } from 'utils';
 import './StudentTable.scss';
 
 export interface StudentTableProps {
@@ -30,9 +31,14 @@ export default function StudentTable({ studentList, onEdit, onRemove }: StudentT
               {student.name}
             </td>
             <td className="student__table__body--cells student__table__body--cells--3rd">
-              {student.gender}
+              {capitalizeString(student.gender)}
             </td>
-            <td className="student__table__body--cells student__table__body--cells--4th">
+            <td
+              className={
+                'student__table__body--cells student__table__body--cells--4th ' +
+                `${getMarkColor(student.mark)}`
+              }
+            >
               {student.mark}
             </td>
             <td className="student__table__body--cells student__table__body--cells--5th">
