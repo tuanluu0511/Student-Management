@@ -14,6 +14,8 @@ import {
 } from '../studentSlice';
 
 import { selectCityList } from 'features/city/citySlice';
+import StudentFilter from '../components/StudentFilter';
+import { ListParams } from 'models';
 
 export default function ListPage() {
   const dispatch = useAppDispatch();
@@ -31,22 +33,36 @@ export default function ListPage() {
     dispatch(studentActions.setFilter({ ...filter, _page: page }));
   };
 
+  const handleSearchChange = (newFilter: ListParams) => {
+    dispatch(studentActions.setFilterDebounce(newFilter));
+  };
+
   const removeHandler = () => {};
   const editHandler = () => {};
 
   return (
     <div className="student__container">
       <Fragment>
+        {loading && <LoadingBar />}
         <div className="student__header">
           <h4 className="student__header--title">Students</h4>
           <button type="button" className="student__header--button">
             Add new student
           </button>
         </div>
-        <StudentTable studentList={studentList} onRemove={removeHandler} onEdit={editHandler} cityList={cityList} />
-        {/* Pagination */}
-        {loading && <LoadingBar />}
 
+        {/* Search bar */}
+        <StudentFilter filter={filter} onSearchChange={handleSearchChange} />
+
+        {/* Student table */}
+        <StudentTable
+          studentList={studentList}
+          onRemove={removeHandler}
+          onEdit={editHandler}
+          cityList={cityList}
+        />
+
+        {/* Pagination */}
         {
           <Pagination
             count={Math.ceil(pagination._totalRows / pagination._limit)}
