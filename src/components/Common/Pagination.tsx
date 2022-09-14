@@ -66,7 +66,8 @@ export default function Pagination({ count, page, onChange }: PaginationProps) {
         <button
           className={
             // eslint-disable-next-line no-useless-concat
-            'pagination--button pagination--button--next ' + `${+curPage === 4 ? 'disabled' : ''}`
+            'pagination--button pagination--button--next ' +
+            `${+curPage === count ? 'disabled' : ''}`
           }
           type="button"
           aria-label="Go to next page"
