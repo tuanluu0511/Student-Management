@@ -37,6 +37,10 @@ export default function ListPage() {
     dispatch(studentActions.setFilterDebounce(newFilter));
   };
 
+  const handleFilterChange = (newFilter: ListParams) => {
+    dispatch(studentActions.setFilter(newFilter));
+  };
+
   const removeHandler = () => {};
   const editHandler = () => {};
 
@@ -52,7 +56,7 @@ export default function ListPage() {
         </div>
 
         {/* Search bar */}
-        <StudentFilter filter={filter} onSearchChange={handleSearchChange} />
+        <StudentFilter filter={filter} onSearchChange={handleSearchChange} onFilterChange={handleFilterChange} />
 
         {/* Student table */}
         <StudentTable

@@ -1,14 +1,24 @@
-import './StudentFilter.scss';
-import { FaSearch } from 'react-icons/fa';
+import { useAppSelector } from 'app/hooks';
+import { selectCityList } from 'features/city/citySlice';
 import { ListParams } from 'models';
-import React from 'react';
+import React, { useState } from 'react';
+import { FaAngleDown, FaSearch } from 'react-icons/fa';
+import './StudentFilter.scss';
 
 export interface StudentFilterProps {
   filter: ListParams;
   onSearchChange: (newFiler: ListParams) => void;
+  onFilterChange: (newFiler: ListParams) => void;
 }
 
-export default function StudentFilter({ filter, onSearchChange }: StudentFilterProps) {
+export default function StudentFilter({
+  filter,
+  onSearchChange,
+  onFilterChange,
+}: StudentFilterProps) {
+  const [cityName, setCityName] = useState('');
+  const cityList = useAppSelector(selectCityList);
+
   const labelElement = document.querySelector('.filter-label');
   const legendElement = document.querySelector('.filter-legend');
 
@@ -29,6 +39,24 @@ export default function StudentFilter({ filter, onSearchChange }: StudentFilterP
     }
 
     onSearchChange(newFilter);
+  };
+  //{ dataset: { [value: string]: string | unknown } }
+  const handleCityChange = (e: React.MouseEvent<HTMLLIElement>) => {
+    if (!onFilterChange) return;
+
+    if (e.currentTarget.dataset.name) {
+      setCityName(e.currentTarget.dataset.name);
+    } else {
+      setCityName('');
+    }
+
+    const newFilter: ListParams = {
+      ...filter,
+      _page: 1,
+      city: e.currentTarget.dataset.code || undefined,
+    };
+
+    onFilterChange(newFilter);
   };
 
   return (
@@ -53,6 +81,42 @@ export default function StudentFilter({ filter, onSearchChange }: StudentFilterP
             </legend>
           </fieldset>
         </div>
+      </div>
+      <div className="dropdown-box">
+        <label className="dropdown-label" htmlFor="filterByCity" data-shrink="false">
+          Filter by city
+        </label>
+        <div className="dropdown-input-box">
+          <div className="dropdown-city" role="button" aria-labelledby="filterByCity">
+            {cityName}
+          </div>
+
+          <FaAngleDown />
+          <fieldset aria-hidden="true" className="dropdown-outline">
+            <legend className="dropdown-legend">
+              <span>Filter by city</span>
+            </legend>
+          </fieldset>
+        </div>
+        <ul className="sub-list" role="listbox">
+          <li className="sub-list-item" data-value="" onClick={handleCityChange}>
+            <em>All</em>
+          </li>
+
+          {Object.entries(cityList).map(([key, value]) => (
+            <li
+              className="sub-list-item"
+              key={key}
+              role="option"
+              aria-selected="false"
+              data-code={value.code}
+              data-name={value.name}
+              onClick={handleCityChange}
+            >
+              {value?.name}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
