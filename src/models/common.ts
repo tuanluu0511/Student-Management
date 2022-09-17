@@ -17,3 +17,8 @@ export interface ListParams {
 
   [key: string]: any;
 }
+
+export interface Sort {
+  value: string;
+  name: string;
+}

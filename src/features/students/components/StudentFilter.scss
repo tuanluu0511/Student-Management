@@ -125,7 +125,7 @@
 ////////////////////////////
 .dropdown-box {
   display: flex;
-  max-width: 25%;
+  max-width: 20%;
   flex-grow: 0;
   flex-basis: 25%;
   position: relative;
@@ -232,4 +232,20 @@
       background-color: rgba(0, 0, 0, 0.08);
     }
   }
+}
+
+.btn-container {
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-clear {
+  border: 1px solid #3f51b5;
+  background: none;
+  color: #3f51b5;
+  padding: 1rem;
+  text-transform: uppercase;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
 }

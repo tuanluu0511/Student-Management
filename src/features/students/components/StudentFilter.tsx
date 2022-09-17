@@ -1,6 +1,6 @@
 import { useAppSelector } from 'app/hooks';
 import { selectCityList } from 'features/city/citySlice';
-import { ListParams } from 'models';
+import { ListParams, Sort } from 'models';
 import React, { useState } from 'react';
 import { FaAngleDown, FaSearch } from 'react-icons/fa';
 import './StudentFilter.scss';
@@ -10,6 +10,17 @@ export interface StudentFilterProps {
   onSearchChange: (newFiler: ListParams) => void;
   onFilterChange: (newFiler: ListParams) => void;
 }
+
+export interface SortValue {
+  [key: string]: Sort;
+}
+
+const sortValue: SortValue = {
+  'name.asc': { value: 'name.asc', name: 'Name ASC' },
+  'name.desc': { value: 'name.desc', name: 'Name DESC' },
+  'mark.asc': { value: 'mark.asc', name: 'Mark ASC' },
+  'mark.desc': { value: 'mark.desc', name: 'Mark DESC' },
+};
 
 export default function StudentFilter({
   filter,
@@ -57,6 +68,37 @@ export default function StudentFilter({
     };
 
     onFilterChange(newFilter);
+  };
+
+  const handleSortChange = (e: React.MouseEvent<HTMLLIElement>) => {
+    if (!onFilterChange) return;
+
+    const value = e.currentTarget.dataset.value;
+    const [_sort, _order] = (value as string).split('.');
+    const newFilter: ListParams = {
+      ...filter,
+      _sort: _sort || undefined,
+      _order: (_order as 'asc' | 'desc') || undefined,
+    };
+    onFilterChange(newFilter);
+  };
+
+  const handleClearFilter = () => {
+    if (!onFilterChange) return;
+
+    const newFilter: ListParams = {
+      ...filter,
+      _page: 1,
+      _sort: undefined,
+      _order: undefined,
+      city: undefined,
+      name_like: undefined,
+    };
+    onFilterChange(newFilter);
+
+    // if (searchRef.current) {
+    //   searchRef.current.value = '';
+    // }
   };
 
   return (
@@ -117,6 +159,47 @@ export default function StudentFilter({
             </li>
           ))}
         </ul>
+      </div>
+      <div className="dropdown-box">
+        <label className="dropdown-label" htmlFor="filterByCity" data-shrink="false">
+          Sort
+        </label>
+        <div className="dropdown-input-box">
+          <div className="dropdown-city" role="button" aria-labelledby="filterByCity">
+            {cityName}
+          </div>
+
+          <FaAngleDown />
+          <fieldset aria-hidden="true" className="dropdown-outline">
+            <legend className="dropdown-legend">
+              <span>Filter by city</span>
+            </legend>
+          </fieldset>
+        </div>
+        <ul className="sub-list" role="listbox">
+          <li className="sub-list-item" data-value="" onClick={handleSortChange}>
+            <em>No sort</em>
+          </li>
+
+          {Object.entries(sortValue).map(([key, value]) => (
+            <li
+              className="sub-list-item"
+              key={key}
+              role="option"
+              aria-selected="false"
+              data-value={value.value}
+              data-name={value.name}
+              onClick={handleSortChange}
+            >
+              {value?.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className="btn-container">
+        <button type="button" className="btn-clear" onClick={handleClearFilter}>
+          clear
+        </button>
       </div>
     </div>
   );

@@ -56,7 +56,11 @@ export default function ListPage() {
         </div>
 
         {/* Search bar */}
-        <StudentFilter filter={filter} onSearchChange={handleSearchChange} onFilterChange={handleFilterChange} />
+        <StudentFilter
+          filter={filter}
+          onSearchChange={handleSearchChange}
+          onFilterChange={handleFilterChange}
+        />
 
         {/* Student table */}
         <StudentTable
