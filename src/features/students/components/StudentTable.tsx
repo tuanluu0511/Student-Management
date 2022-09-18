@@ -15,6 +15,15 @@ export default function StudentTable({
   onRemove,
   cityList,
 }: StudentTableProps) {
+  const removeHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const data = e.currentTarget.dataset.value;
+
+    if (data) {
+      const studentData: Student = JSON.parse(data);
+      onRemove(studentData);
+    }
+  };
+
   return (
     <table className="student__table">
       <thead className="student__table__head">
@@ -61,7 +70,8 @@ export default function StudentTable({
               <button
                 className="button button--remove"
                 type="button"
-                onClick={() => onRemove?.(student)}
+                data-value={JSON.stringify(student)}
+                onClick={removeHandler}
               >
                 Remove
               </button>

@@ -27,7 +27,8 @@ export default function StudentFilter({
   onSearchChange,
   onFilterChange,
 }: StudentFilterProps) {
-  const [cityName, setCityName] = useState('');
+  const [cityName, setCityName] = useState('Filter by city');
+  const [sortName, setSortName] = useState('Sort');
   const cityList = useAppSelector(selectCityList);
 
   const labelElement = document.querySelector('.filter-label');
@@ -55,23 +56,40 @@ export default function StudentFilter({
   const handleCityChange = (e: React.MouseEvent<HTMLLIElement>) => {
     if (!onFilterChange) return;
 
-    if (e.currentTarget.dataset.name) {
-      setCityName(e.currentTarget.dataset.name);
+    const data = e.currentTarget.dataset.value;
+
+    if (data) {
+      const cityData = JSON.parse(data);
+
+      setCityName(cityData.name);
+
+      const newFilter: ListParams = {
+        ...filter,
+        _page: 1,
+        city: cityData.code,
+      };
+
+      onFilterChange(newFilter);
     } else {
       setCityName('');
+      const newFilter: ListParams = {
+        ...filter,
+        _page: 1,
+        city: undefined,
+      };
+
+      onFilterChange(newFilter);
     }
-
-    const newFilter: ListParams = {
-      ...filter,
-      _page: 1,
-      city: e.currentTarget.dataset.code || undefined,
-    };
-
-    onFilterChange(newFilter);
   };
 
   const handleSortChange = (e: React.MouseEvent<HTMLLIElement>) => {
     if (!onFilterChange) return;
+
+    if (e.currentTarget.dataset.name) {
+      setSortName(e.currentTarget.dataset.name);
+    } else {
+      setSortName('');
+    }
 
     const value = e.currentTarget.dataset.value;
     const [_sort, _order] = (value as string).split('.');
@@ -85,6 +103,9 @@ export default function StudentFilter({
 
   const handleClearFilter = () => {
     if (!onFilterChange) return;
+
+    setCityName('Filter by city');
+    setSortName('Sort');
 
     const newFilter: ListParams = {
       ...filter,
@@ -151,8 +172,7 @@ export default function StudentFilter({
               key={key}
               role="option"
               aria-selected="false"
-              data-code={value.code}
-              data-name={value.name}
+              data-value={JSON.stringify(value)}
               onClick={handleCityChange}
             >
               {value?.name}
@@ -166,13 +186,13 @@ export default function StudentFilter({
         </label>
         <div className="dropdown-input-box">
           <div className="dropdown-city" role="button" aria-labelledby="filterByCity">
-            {cityName}
+            {sortName}
           </div>
 
           <FaAngleDown />
           <fieldset aria-hidden="true" className="dropdown-outline">
             <legend className="dropdown-legend">
-              <span>Filter by city</span>
+              <span>Sort</span>
             </legend>
           </fieldset>
         </div>
