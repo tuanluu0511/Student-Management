@@ -17,8 +17,10 @@ import { selectCityList } from 'features/city/citySlice';
 import StudentFilter from '../components/StudentFilter';
 import { ListParams, Student } from 'models';
 import studentApi from 'api/studentApi';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function ListPage() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const studentList = useAppSelector(selectStudentList);
   const pagination = useAppSelector(selectStudentPagination);
@@ -55,7 +57,10 @@ export default function ListPage() {
       console.log('Failed to fetch student', error);
     }
   };
-  const editHandler = () => {};
+  
+  const editStudentHandler = (student: Student) => {
+    navigate(`${student.id}`);
+  };
 
   return (
     <div className="student__container">
@@ -63,9 +68,11 @@ export default function ListPage() {
         {loading && <LoadingBar />}
         <div className="student__header">
           <h4 className="student__header--title">Students</h4>
-          <button type="button" className="student__header--button">
-            Add new student
-          </button>
+          <Link to="add">
+            <button type="button" className="student__header--button">
+              Add new student
+            </button>
+          </Link>
         </div>
 
         {/* Search bar */}
@@ -79,7 +86,7 @@ export default function ListPage() {
         <StudentTable
           studentList={studentList}
           onRemove={removeStudentHandler}
-          onEdit={editHandler}
+          onEdit={editStudentHandler}
           cityList={cityList}
         />
 

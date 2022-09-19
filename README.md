@@ -149,7 +149,30 @@ student slice state:
 - pagination
 - filter { page: 1, limit: 10, ... }
 
-ADD/EDIT
+### ADD/EDIT
 
 - React Hook Form v7
 - Yup
+
+ROUTINGS
+
+- /admin/students/add: add new student
+- /admin/students/:studentId: update a student
+
+Student Form
+
+- Mode: Add/Edit
+- Initial values
+- Values
+  - name: Text Input
+  - age: Number Input
+  - gender: Radio options
+  - city: Select
+  - mark: Number Input
+- Validations: all required
+  - name: at least two words
+  - age: >= 18
+  - gender: male / female
+  - city: required
+  - mark: 0 -> 10
+- Submission: redirect to student list page after submitting successfully
