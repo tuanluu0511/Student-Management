@@ -1,5 +1,4 @@
 import { NotFound, PrivateRoute } from 'components/Common';
-import Overlay from 'components/Common/Overlay';
 import { AdminLayout } from 'components/Layout';
 import LoginPage from 'features/auth/pages/LoginPage';
 import Dashboard from 'features/dashboard';
@@ -15,7 +14,6 @@ function App() {
 
   return (
     <Fragment>
-      <Overlay />
       <Routes>
         <Route
           path="/"

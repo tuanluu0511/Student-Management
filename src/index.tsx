@@ -1,11 +1,11 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { HistoryRouter as Router } from 'redux-first-history/rr6';
 import App from './App';
 import { history, store } from './app/store';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { HistoryRouter as Router } from 'redux-first-history/rr6';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

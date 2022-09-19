@@ -46,6 +46,7 @@ export default function ListPage() {
     try {
       // Remove student API
       await studentApi.remove(student?.id || '');
+      // console.log(student?.id);
       // Trigger to re-fetch student list with current filter
       const newFilter = { ...filter };
       dispatch(studentActions.setFilter(newFilter));
